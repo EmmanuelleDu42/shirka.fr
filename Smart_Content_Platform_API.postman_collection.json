@@ -1,0 +1,901 @@
+{
+	"info": {
+		"_postman_id": "7e8f9a10-b2c3-4d5e-8f6g-7h8i9j0k1l2m",
+		"name": "Smart Content Platform API",
+		"description": "Collection de requêtes pour tester l'API de la Smart Content Platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Test User\",\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\",\n    \"acceptTerms\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Inscription d'un nouvel utilisateur"
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Connexion d'un utilisateur"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/auth/me",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						},
+						"description": "Obtenir les informations de l'utilisateur connecté"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currentPassword\": \"password123\",\n    \"newPassword\": \"newPassword123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"password"
+							]
+						},
+						"description": "Mettre à jour le mot de passe"
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/forgot-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"forgot-password"
+							]
+						},
+						"description": "Demander la réinitialisation du mot de passe"
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"reset-token-here\",\n    \"password\": \"newPassword123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/reset-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"reset-password"
+							]
+						},
+						"description": "Réinitialiser le mot de passe"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints liés à l'authentification"
+		},
+		{
+			"name": "Content",
+			"item": [
+				{
+					"name": "Generate Content",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": 1,\n    \"platform\": \"blog\",\n    \"topic\": \"Marketing digital\",\n    \"keywords\": [\"stratégie\", \"SEO\", \"réseaux sociaux\"],\n    \"tone\": \"professional\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/content/generate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"content",
+								"generate"
+							]
+						},
+						"description": "Générer du contenu"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Contents",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/content?userId=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"content"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Obtenir tous les contenus d'un utilisateur"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Content By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/content/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"content",
+								"1"
+							]
+						},
+						"description": "Obtenir un contenu par son ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Content",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"<h2>10 Stratégies de Marketing Digital pour 2025 (Mis à jour)</h2><p>Le marketing digital évolue constamment...</p>\",\n    \"title\": \"10 Stratégies de Marketing Digital pour 2025 (Mis à jour)\",\n    \"status\": \"published\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/content/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"content",
+								"1"
+							]
+						},
+						"description": "Mettre à jour un contenu"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Content",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/content/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"content",
+								"1"
+							]
+						},
+						"description": "Supprimer un contenu"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Content Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/content/stats?userId=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"content",
+								"stats"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Obtenir les statistiques de contenu d'un utilisateur"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints liés à la gestion du contenu"
+		},
+		{
+			"name": "Subscriptions",
+			"item": [
+				{
+					"name": "Get All Subscriptions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/subscriptions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subscriptions"
+							]
+						},
+						"description": "Obtenir tous les abonnements disponibles"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Subscription By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/subscriptions/creator",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subscriptions",
+								"creator"
+							]
+						},
+						"description": "Obtenir un abonnement par son ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Subscription",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/subscriptions/user?userId=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subscriptions",
+								"user"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Obtenir l'abonnement actuel de l'utilisateur"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Checkout Session",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": 1,\n    \"subscriptionId\": \"creator\",\n    \"billingType\": \"monthly\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/subscriptions/create-checkout-session",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subscriptions",
+								"create-checkout-session"
+							]
+						},
+						"description": "Créer une session de paiement Stripe"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Subscription",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": 1,\n    \"subscriptionId\": \"pro\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/subscriptions/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subscriptions",
+								"user"
+							]
+						},
+						"description": "Mettre à jour l'abonnement d'un utilisateur"
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel User Subscription",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/subscriptions/user?userId=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subscriptions",
+								"user"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Annuler l'abonnement d'un utilisateur"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Transactions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/subscriptions/transactions?userId=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subscriptions",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Obtenir l'historique des transactions d'un utilisateur"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints liés à la gestion des abonnements"
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Get Global Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/stats",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"stats"
+							]
+						},
+						"description": "Obtenir les statistiques globales de la plateforme"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/users?page=1&limit=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "subscription",
+									"value": "creator",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "user",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "john",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "-createdAt",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Obtenir tous les utilisateurs"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/users/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"1"
+							]
+						},
+						"description": "Obtenir un utilisateur par son ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe Updated\",\n    \"email\": \"john.updated@example.com\",\n    \"role\": \"user\",\n    \"subscription\": \"pro\",\n    \"generationsLimit\": 100\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/users/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"1"
+							]
+						},
+						"description": "Mettre à jour un utilisateur"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/users/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"3"
+							]
+						},
+						"description": "Supprimer un utilisateur"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Contents",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/contents?page=1&limit=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"contents"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "platform",
+									"value": "blog",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "published",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "marketing",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "-createdAt",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Obtenir tous les contenus"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Transactions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/transactions?page=1&limit=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "subscriptionId",
+									"value": "creator",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "succeeded",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "-createdAt",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Obtenir toutes les transactions"
+					},
+					"response": []
+				},
+				{
+					"name": "Export Data",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/export?type=users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"export"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "users",
+									"description": "Type de données à exporter (users, contents, transactions)"
+								}
+							]
+						},
+						"description": "Exporter les données au format CSV"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints liés à l'administration de la plateforme"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5001/api",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
