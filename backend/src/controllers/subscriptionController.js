@@ -294,7 +294,7 @@ const createCheckoutSession = async (req, res) => {
  * @route   POST /api/subscriptions/webhook
  * @access  Public
  */
-const handleStripeWebhook = async (req, res) => {
+const stripeWebhook = async (req, res) => {
     try {
         // Dans une vraie implémentation, nous vérifierions la signature de l'événement
         // et traiterions les différents types d'événements (paiement réussi, échec, etc.)
@@ -466,12 +466,14 @@ const getUserTransactions = async (req, res) => {
 
 // Export des fonctions du contrôleur
 module.exports = {
-    getSubscriptions,
-    getSubscriptionById,
-    getUserSubscription,
-    createCheckoutSession,
-    handleStripeWebhook,
-    updateUserSubscription,
-    cancelUserSubscription,
-    getUserTransactions
+  getSubscriptions,
+  getSubscriptionById,
+  getUserSubscription,
+  createCheckoutSession,
+  stripeWebhook, // 👈 renommé ici
+  updateUserSubscription,
+  cancelUserSubscription,
+  getUserTransactions
 };
+
+

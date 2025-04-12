@@ -164,7 +164,7 @@ const transactions = [
  * @route   GET /api/admin/stats
  * @access  Admin
  */
-const getGlobalStats = async (req, res) => {
+const getPlatformStats = async (req, res) => {
     try {
         // Calculer les statistiques globales
         const stats = {
@@ -659,7 +659,7 @@ const exportData = async (req, res) => {
 
 // Export des fonctions du contrôleur
 module.exports = {
-    getGlobalStats,
+    getPlatformStats,
     getAllUsers,
     getUserById,
     updateUser,
